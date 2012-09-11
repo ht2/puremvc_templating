@@ -1,13 +1,13 @@
 <h2>Getting Started</h2>
-<p>You are currently looking at the output of <abbr title="application\index\controller\commands\view\HomeView.php">HomeView.php</abbr></p>
-<p>This is currently set as the default view for this site, as defined in the <abbr title="application\index\controller\commands\application\StateCommand.php">StateCommand.php</abbr>.</p>
-<p>The <abbr title="application\index\controller\commands\application\StateCommand.php">StateCommand</abbr> splits the current URL and passes a notification to the <abbr title="application\index\AppliactionFacade.php">ApplicationFacade</abbr>.</p>
-<p>The application will then execute and run the specified command (in this case <abbr title="application\index\controller\commands\view\HomeView.php">HomeView</abbr>) based on the name of the notification passed.</p>
+<p>You are currently looking at the output of application\index\controller\commands\view\HomeView.php.</p>
+<p>This is currently set as the default view for this site, as defined in the application\index\controller\commands\application\StateCommand.php.</p>
+<p>The application\index\controller\commands\application\StateCommand.php splits the current URL and passes a notification to the application\index\AppliactionFacade.php.</p>
+<p>The application will then execute and run the specified command (in this case HomeView) based on the name of the notification passed.</p>
 
 <hr>
 
 <h2>The URL</h2>
-<p>URLs are split from the root directory as such...(hover over each section to view more information)</p>
+<p>URLs are split from the root directory as such...</p>
 <p>
     <code>
         <abbr title='The root of your site. If you are not running of the root of your site (a subfolder) then you may need to define this manually in the MySQL.php file.'>http://yoursiteroot.com</abbr>
