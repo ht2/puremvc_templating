@@ -29,26 +29,8 @@ class IncludesProxy extends Proxy
 		{
 			case 'jquery':
 				$output .= br('<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>');
-				$output .= br('<script type="text/javascript" src="/view/packages/jquery.ui/js/jquery-ui-1.8.21.custom.min.js"></script>');
-				$output .= $this->includeCSS( 'jquery-ui-1.8.21.custom.css', '{SITE_DIR}/view/packages/jquery.ui/css/smoothness/' );
 				$output .= br('<script type="text/javascript" src="{SITE_DIR}/view/javascript/commonJQuery.js"></script>');	;	
 			break;
-			
-            case 'validate':
-				$output .= $this->includeJS( '{SITE_DIR}/view/packages/jquery-validation-1.9.0/jquery.validate.min.js' );
-			break;
-        
-			case "datatables":
-				$output .= $this->includeJS( '{SITE_DIR}/view/packages/DataTables-1.9.1/media/js/jquery.dataTables.min.js' );
-				$output .= $this->includeCSS( 'jquery.dataTables_themeroller.css', '/view/packages/DataTables-1.9.1/media/css/' );
-				$output .= $this->includeJS( '{SITE_DIR}/view/packages/DataTables-1.9.1/media/js/dataTables.init.js' );
-            break;
-        
-			case "lightbox":
-				$output .= $this->includeJS( '{SITE_DIR}/view/packages/jquery-lightbox-0.5/js/jquery.lightbox-0.5.min.js' );
-				$output .= $this->includeCSS( 'jquery.lightbox-0.5.css', '{SITE_DIR}/view/packages/jquery-lightbox-0.5/css/' );
-				$output .= $this->includeJS( '{SITE_DIR}/view/packages/jquery-lightbox-0.5/js/lightbox.init.js' );
-            break;
             case "bootstrap":
                 $output .= $this->includeJS( '{SITE_DIR}/view/packages/bootstrap/js/bootstrap.min.js' );
 				$output .= $this->includeCSS( 'bootstrap.min.css', '{SITE_DIR}/view/packages/bootstrap/css/' );
