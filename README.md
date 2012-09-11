@@ -19,6 +19,7 @@
         <abbr title='The ID is usually used to switch between different views/edits. Accessed using $this->id'>id</abbr>
     </code>
 </p>
+<p>With this basic setup, the StateCommand is set to route to this page and function regardless of the view/command/id.</p>
 <hr>
 <h2>The ExtendedSimpleCommand</h2>
 <p>The <abbr title="application/common/controller/command/ExtendedSimpleCommand.php">ExtendedSimpleCommand</abbr> is the main building block of a view. It provides a number of functions to help you with templating and basic page construction and most if not all views will extend this class.</p>
