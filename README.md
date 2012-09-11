@@ -19,16 +19,6 @@
         <abbr title='The ID is usually used to switch between different views/edits. Accessed using $this->id'>id</abbr>
     </code>
 </p>
-<p>With this basic setup, the StateCommand is set to route to this page and function regardless of the view/command/id.</p>
-<p>Try selecting the different links below to see the variables change below:</p>
-<ul>
-    <li><a href='{SITE_DIR}/home/get/1'>{SITE_DIR}/home/get/1</a>
-    <li><a href='{SITE_DIR}/blogs/edit/78'>{SITE_DIR}/blogs/edit/78</a>
-    <li><a href='{SITE_DIR}/pages/hello/world'>{SITE_DIR}/pages/hello/world</a>
-</ul>
-<p><strong>Current View:</strong> {VIEW}</p>
-<p><strong>Current Command:</strong> {COMMAND}</p>
-<p><strong>Current ID:</strong> {ID}</p>
 <hr>
 <h2>The ExtendedSimpleCommand</h2>
 <p>The <abbr title="application/common/controller/command/ExtendedSimpleCommand.php">ExtendedSimpleCommand</abbr> is the main building block of a view. It provides a number of functions to help you with templating and basic page construction and most if not all views will extend this class.</p>
