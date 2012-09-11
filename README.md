@@ -1,5 +1,5 @@
 <h2>Getting Started</h2>
-<p>You are currently looking at the output of application\index\controller\commands\view\HomeView.php.</p>
+<p>You are currently looking at the output of https://github.com/ht2/puremvc_templating/blob/master/application/index/controller/commands/view/HomeView.php.</p>
 <p>This is currently set as the default view for this site, as defined in the application\index\controller\commands\application\StateCommand.php.</p>
 <p>The application\index\controller\commands\application\StateCommand.php splits the current URL and passes a notification to the application\index\AppliactionFacade.php.</p>
 <p>The application will then execute and run the specified command (in this case HomeView) based on the name of the notification passed.</p>
