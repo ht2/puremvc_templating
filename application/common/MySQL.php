@@ -6,8 +6,6 @@ class MySQL
     public $database;
     public $user;
     public $pass;
-    public $site_name = "Duke Insights";
-    public $site_root = "Duke Insights";
     
     public $mysqli;
     public $result;
