@@ -4,9 +4,6 @@ require_once COMMON.'Session.php';
 require_once COMMON.'Utils.php';
 require_once PUREMVC.'patterns/command/SimpleCommand.php';  
 require_once COMMON.'controller/command/ExtendedSimpleCommand.php';  
-require_once COMMON.'controller/command/AdminCommand.php';  
-require_once COMMON.'controller/command/SurveyCommand.php';  
-require_once COMMON.'controller/command/JSONCommand.php';  
 require_once PUREMVC.'interfaces/INotification.php';
 
 foreach( glob(COMMON.'model/proxies/*.php') as $filename ) require $filename;

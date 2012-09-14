@@ -42,7 +42,7 @@ class ExtendedSimpleCommand extends SimpleCommand
         $this->addInclude('bootstrap');
 		$this->addInclude('common');
         
-		$this->site_title 	= $this->mysql->site_name;
+		$this->site_title 	= 'HT2 PureMVC PHP Templating';
         
 		$this->bc_links = array();
         
@@ -94,7 +94,7 @@ class ExtendedSimpleCommand extends SimpleCommand
 			'{ID}' 					=> $this->id,
 			'{VIEW}' 				=> $this->view,
 			'{COMMAND}' 			=> $this->command,
-            '{SITE_TITLE}'          => 'HT2 PureMVC PHP Templating',
+            '{SITE_TITLE}'          => $this->site_title,
             '{SITE_DIR}'            => $this->mysql->site_root.$this->url_start
 		);
 	}
