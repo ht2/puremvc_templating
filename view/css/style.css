@@ -10,12 +10,7 @@
 .bold{ font-weight:bold;}
 .italic{ font-style:italic;}
 
-
-#supercontainer{
-    overflow:auto;
-	padding-bottom: 110px;
-}
-
+#header
 
 section{ padding-top: 5px; }
 .nav-list li a{
