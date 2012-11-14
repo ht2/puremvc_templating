@@ -8,7 +8,10 @@ class StateCommand extends SimpleCommand
 {
 	public function execute( INotification $notification )
 	{	
-        $request  = str_replace( "", "", $_SERVER['REQUEST_URI']); 
+        
+        $mysql = new MySQL();
+        
+        $request  = str_replace( $mysql->base_dir, "", $_SERVER['REQUEST_URI']); 
         $all_params = explode( '?', $request );
         if( isset($all_params)){
             $params = explode("/", $all_params[0]);
@@ -16,8 +19,8 @@ class StateCommand extends SimpleCommand
             $params = array();
         }
         
-        $this->state = ( isset( $params[1] ) ) ? strtolower($params[1]) : '';
-        $this->view = ( isset( $params[2] ) ) ? strtolower($params[2]) : '';
+        
+        $this->view = ( isset( $params[1] ) ) ? strtolower($params[1]) : '';
         
         switch( $this->view )
         {		

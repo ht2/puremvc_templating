@@ -23,13 +23,23 @@ class MySQL
             default:
             case "localhost":
                 $this->host 	= "localhost";
-                $this->database = "duke_survey";
+                $this->database = "";
                 $this->user 	= "root";
                 $this->pass 	= "";
                 $this->site_root    =   "http://localhost";
                 $this->base_dir     =   "/PureMVC";
                 $this->debug = true;
             break;
+        
+            case "pmvc.ht2.co.uk":
+                $this->host 	= "localhost";
+                $this->database = "";
+                $this->user 	= "root";
+                $this->pass 	= "";
+                $this->site_root    =   "http://".$_SERVER['SERVER_NAME'];
+                $this->base_dir     =   "";
+                $this->debug = true;
+                break;
         }
 
         $this->full_url     =   $this->site_root.$this->base_dir;
