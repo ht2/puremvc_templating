@@ -23,6 +23,8 @@ class ExtendedSimpleCommand extends SimpleCommand
 		$this->mysql 		= new MySQL();	
 		$this->template 	= new Template();
         
+        
+        $this->url_start = $this->mysql->base_dir;
 		
         //Layouts
         $this->container    = $this->loadTemplate('common/container.html');
@@ -52,7 +54,9 @@ class ExtendedSimpleCommand extends SimpleCommand
 	}
     
     protected function setParams(){
+        
         $request  = str_replace( $this->url_start, "", $_SERVER['REQUEST_URI']); 
+        
         $all_params = explode( '?', $request );
         if( isset($all_params)){
             $this->params = explode("/", $all_params[0]);
@@ -60,10 +64,10 @@ class ExtendedSimpleCommand extends SimpleCommand
             $this->params = array();
         }
         
-        $view_default       = isset($this->params[2]) ? $this->params[2] : "";
-        $command_default    = isset($this->params[3]) ? $this->params[3] : "";
-        $id_default         = isset($this->params[4]) ? $this->params[4] : "";
-        $sub_default        = isset($this->params[5]) ? $this->params[5] : "";
+        $view_default       = isset($this->params[1]) ? $this->params[1] : "";
+        $command_default    = isset($this->params[2]) ? $this->params[2] : "";
+        $id_default         = isset($this->params[3]) ? $this->params[3] : "";
+        $sub_default        = isset($this->params[4]) ? $this->params[4] : "";
         
         $this->view     = $this->checkPost('view',      1,  $view_default );
         $this->command  = $this->checkPost('command',   1,  $command_default );
@@ -95,7 +99,7 @@ class ExtendedSimpleCommand extends SimpleCommand
 			'{VIEW}' 				=> $this->view,
 			'{COMMAND}' 			=> $this->command,
             '{SITE_TITLE}'          => $this->site_title,
-            '{SITE_DIR}'            => $this->mysql->site_root.$this->url_start
+            '{SITE_DIR}'            => $this->mysql->full_url
 		);
 	}
 	

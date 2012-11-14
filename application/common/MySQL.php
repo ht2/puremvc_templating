@@ -9,6 +9,10 @@ class MySQL
     
     public $mysqli;
     public $result;
+    
+    public $site_root;
+    public $base_dir;
+    public $full_url;
 
     public function __construct()
     {
@@ -22,11 +26,14 @@ class MySQL
                 $this->database = "duke_survey";
                 $this->user 	= "root";
                 $this->pass 	= "";
-                $this->site_root = "http://localhost/PureMVC";
+                $this->site_root    =   "http://localhost";
+                $this->base_dir     =   "/PureMVC";
                 $this->debug = true;
             break;
         }
 
+        $this->full_url     =   $this->site_root.$this->base_dir;
+        
         $this->mysqli = new mysqli( $this->host, $this->user, $this->pass, $this->database );
         $this->checkConnectError();
         
