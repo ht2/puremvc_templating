@@ -24,3 +24,39 @@ section{ padding-top: 5px; }
     margin: 0 0 -1px;
     padding: 8px 14px;
 }
+
+@media (max-width: 1200px) {
+    #navbar{
+        width: 200px;
+    }
+}
+
+@media (max-width: 980px) {
+    #navbar{
+        width: 170px;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 979px) { 
+    #navbar{
+        width: 150px;
+    }
+}
+ 
+/* Landscape phone to portrait tablet */
+@media (max-width: 767px) { 
+    
+    #navbar{
+        position: static;
+        width: auto;
+    }
+}
+ 
+/* Landscape phones and down */
+@media (max-width: 480px) {
+   #navbar{
+        position: static;
+        width: auto;
+    }
+}
+ 
