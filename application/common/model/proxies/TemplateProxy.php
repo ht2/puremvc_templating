@@ -113,64 +113,101 @@ class TemplateProxy extends Proxy
 		return "jpg|jpeg|png|gif|bmp";
 	}
     
-    public function handleImageUpload( $filename, $field_name='uploadedimage' ){
-        $valid_exts 	= explode( "|", $this->facade->retrieveProxy( TemplateProxy::NAME )->validImageExt() );
-        $max_file_size	= $this->facade->retrieveProxy( TemplateProxy::NAME )->maxImageSize();
-
-        $upload_location 	= HOST."/view/uploads/images/";
-        $pathinfo 			= pathinfo( $_FILES[$field_name]['name']);
-        $error				= $_FILES[$field_name]['error'];
-        $size				= $_FILES[$field_name]['size'];
-        $ext 				= strtolower($pathinfo['extension']);
-    
-        //Check file ext and that not bigger than 20MB
-        if( in_array( $ext, $valid_exts ) && $error==0 && $size<=$max_file_size ){
-
-            $uploadfilename = $_FILES[$field_name]['name'];
-            $orig_file_name = substr($uploadfilename, 0, strrpos($uploadfilename,".") );
-            $orig_file_name = cleanForShortURL( $orig_file_name );
-            $fileext = strtolower(substr($uploadfilename,strrpos($uploadfilename,".")+1));										
-            $fullfilename = $filename . "." . $fileext;
-
-            if( !file_exists($upload_location) ){  
-                mkdir( $upload_location );
-            }					
-
-            move_uploaded_file( $_FILES[$field_name]['tmp_name'], $upload_location.$fullfilename );
-            return $fullfilename;
-        } else {
-            return false;
+    public function handleUpload( $required=false, $field_name='uploadedfile', $filename=null, $destination='/view/uploads/images/profiles/', $exts = null, $max_file_size = null ){
+        
+        //Set valid extensions
+        if( $exts == null ){
+            $exts = $this->validUploadsExt();
         }
-    }
-    
-    public function handleFileUpload(){
-        $valid_exts 	= explode( "|", $this->facade->retrieveProxy( TemplateProxy::NAME )->validUploadsExt() );
-        $max_file_size	= $this->facade->retrieveProxy( TemplateProxy::NAME )->maxUploadSize();
-
-        $upload_location 	= HOST."/uploads/resources/";
-        $pathinfo 			= pathinfo( $_FILES['uploadedfile']['name']);
-        $error				= $_FILES['uploadedfile']['error'];
-        $size				= $_FILES['uploadedfile']['size'];
-        $ext 				= strtolower($pathinfo['extension']);
-    
-        //Check file ext and that not bigger than 20MB
-        if( in_array( $ext, $valid_exts ) && $error==0 && $size<=$max_file_size ){
-
-            $uploadfilename = $_FILES['uploadedfile']['name'];
-            $orig_file_name = substr($uploadfilename, 0, strrpos($uploadfilename,".") );
-            $orig_file_name = cleanForShortURL( $orig_file_name );
-            $fileext = strtolower(substr($uploadfilename,strrpos($uploadfilename,".")+1));										
-            $fullfilename = $orig_file_name . "_" . time() . "." . $fileext;
-
-            if( !file_exists($upload_location) ){  
-                mkdir( $upload_location );
-            }					
-
-            move_uploaded_file( $_FILES['uploadedfile']['tmp_name'], $upload_location.$fullfilename );
-            return $fullfilename;
+        //Explode extenstions into array
+        $valid_exts = explode( "|", $exts );
+        
+        //Retrieve max size
+        if($max_file_size == null ){
+            $max_file_size = $this->maxUploadSize();
         } else {
-            return false;
+            $max_file_size = intval($max_file_size);
         }
+
+        //Set the upload location
+        $upload_location = HOST.$destination;
+        //Check file was uploaded
+        if( !isset($_FILES[$field_name]) || $_FILES[$field_name]=="" )
+        {
+            if( $required ){
+                return array('error'=>true, 'message'=>'No file was uploaded');
+            } else {
+                return array( 'error'=>false, 'filename'=>false );
+            }
+        }
+        
+        //Retrieve upload details
+        $pathinfo = pathinfo( $_FILES[$field_name]['name']);
+        $size	= $_FILES[$field_name]['size'];
+        $error	= $_FILES[$field_name]['error'];
+        
+        
+        //PHP error!
+        if( $error>0 ){
+            switch( $error ){
+                //If standard error, return feedback
+                default:
+                    return array('error'=>true, 'message'=>'Server error saving the file' );
+                    break;
+                
+               case 4:
+                   //If error = 4 then no file uploaded
+                   //Check if a file was required
+                   //return appropriate feedback
+                   if( $required ){
+                       return array('error'=>true, 'message'=>'No file was uploaded');
+                   } else {
+                       return array( 'error'=>false, 'filename'=>false );
+                   }
+                   break;
+            }
+            
+        } else {
+            $ext = strtolower($pathinfo['extension']);
+        }
+        
+        
+        //Invalid extension
+        if( !in_array( $ext, $valid_exts ) ){
+            return array( 'error'=>true, 'message'=>'Invalid file');
+        }
+        
+        //Filesize too large
+        if( $size>$max_file_size ){
+            return array( 'error'=>true, 'message'=>'File too large');
+        }
+        
+        
+        
+        //Retrieve filename
+        $uploadfilename = $_FILES[$field_name]['name'];
+        //Check file extension
+        $fileext = strtolower(substr($uploadfilename,strrpos($uploadfilename,".")+1));	
+        //Create full filename (passed filename + extension)
+        
+        if( $filename==null && strlen($filename)==0 ){
+            $orig_file_name = substr($uploadfilename, 0, strrpos($uploadfilename,".") );
+            $orig_file_name = cleanForShortURL( $orig_file_name );	
+            $filename = $orig_file_name . "_" . time();
+        }					
+        
+        $fullfilename = $filename . "." . $fileext;
+        
+        //Check and create directory
+        if( !file_exists($upload_location) ){
+            mkdir( $upload_location );
+        }	
+        
+        //Move temp file to new location
+        move_uploaded_file( $_FILES[$field_name]['tmp_name'], $upload_location.$fullfilename );
+        
+        //return feedback
+        return array( 'error'=>false, 'filename'=>$fullfilename );
     }
 
 	public function vo()
