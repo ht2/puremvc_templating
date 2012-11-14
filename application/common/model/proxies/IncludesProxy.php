@@ -28,12 +28,13 @@ class IncludesProxy extends Proxy
 		switch( $type )
 		{
 			case 'jquery':
-				$output .= br('<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>');
+				$output .= br('<script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>');
 				$output .= br('<script type="text/javascript" src="{SITE_DIR}/view/javascript/commonJQuery.js"></script>');	;	
 			break;
             case "bootstrap":
                 $output .= $this->includeJS( '{SITE_DIR}/view/packages/bootstrap/js/bootstrap.min.js' );
 				$output .= $this->includeCSS( 'bootstrap.min.css', '{SITE_DIR}/view/packages/bootstrap/css/' );
+				$output .= $this->includeCSS( 'bootstrap-responsive.css', '{SITE_DIR}/view/packages/bootstrap/css/' );
             break;
             case "common":
                 $output .= $this->includeJS( '{SITE_DIR}/view/javascript/common.js' );

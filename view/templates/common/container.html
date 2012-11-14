@@ -1,7 +1,8 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html lang="en">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>{SITE_TITLE}</title>
 {INCLUDES}
 
@@ -14,15 +15,13 @@
 {INITIALISERS}
 </head>
 
-<body id="{MODULE}">
-    <div id="wrap">
-        <div id = "supercontainer">
-            <div id='header'>{HEADER}</div>
-            <div id='content'>{MAIN}</div>
-        </div>
+<body id="{MODULE}" data-spy="scroll" >
+    <header id='header'>
+        <div class='container'>{HEADER}</div>
+    </header>
+    <div id='supercontainer'>
+        <div id='content' class="container">{MAIN}</div>
     </div>
-    <div id='footer_container'>
-        <div id='footer'>{FOOTER}</div>
-    </div>
+    <footer id="footer">{FOOTER}</footer>
 </body>
 </html>
